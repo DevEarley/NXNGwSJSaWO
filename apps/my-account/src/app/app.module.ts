@@ -1,6 +1,6 @@
-/* 
-      * This RemoteEntryModule is imported here to allow TS to find the Module during 
-      * compilation, allowing it to be included in the built bundle. This is required 
+/*
+      * This RemoteEntryModule is imported here to allow TS to find the Module during
+      * compilation, allowing it to be included in the built bundle. This is required
       * for the Module Federation Plugin to expose the Module correctly.
       * */
       import { RemoteEntryModule } from './remote-entry/entry.module';
@@ -14,7 +14,8 @@ import { AppComponent } from './app.component';
     AppComponent,
   ],
   imports: [
-    BrowserModule, RemoteEntryModule
+    BrowserModule,
+    RemoteEntryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

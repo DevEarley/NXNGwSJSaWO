@@ -1,6 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Observable } from 'windowed-observable';
-const observable = new Observable('tpsAuthServiceLoaded');
+const myServiceLoadedSuccessfully$ = new Observable('myServiceLoadedSuccessfully');
+const messageFromShell$ = new Observable('messageFromShell');
 declare let myService: any;
 @Component({
   selector: 'mfe-poc-root',
@@ -17,10 +18,16 @@ export class AppComponent {
 
       console.log('APP Component |my.service.js loaded');
       console.log(myService.helloWorld())
-      observable.publish('myService loaded successfully');
+      myServiceLoadedSuccessfully$.publish('Success');
 
     }
     this.renderer.appendChild(document.head, script);
     console.log('APPCOMPONENT | CONSTRUCTOR INIT FINISHED');
+  }
+  sendMessage =():void=>{
+    console.log('APPCOMPONENT | sendMessage');
+
+    messageFromShell$.publish('Hellllooooo');
+
   }
 }

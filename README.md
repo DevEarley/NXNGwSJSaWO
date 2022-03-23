@@ -24,10 +24,10 @@ And from [Setup MFE with Angular](https://nx.dev/guides/setup-mfe-with-angular):
 
 ## What does the workspace look like?
 ```
-+apps // MFE Shell applications. Each app is hosted individually. A shell app contains routing that points to these remote applications. At this level, the apps should contain very little logic. Just the things necessary for routing and very basic layouts.
-+libs // The "guts" of the apps. Most of the logic and UI binding will live here.
-+tools // These are build steps, generators  amd schematics. Things to help standardize the dev environment.
-+static // Stateless Javascript files that are loaded at runtime. Not related to Angular.
+apps\  MFE Shell applications. Each app is hosted individually. A shell app contains routing that points to these remote applications. At this level, the apps should contain very little logic. Just the things necessary for routing and very basic layouts.
+libs\ The "guts" of the apps. Most of the logic and UI binding will live here.
+tools\ These are build steps, generators  amd schematics. Things to help standardize the dev environment.
+static\ Stateless Javascript files that are loaded at runtime. Not related to Angular.
 ```
 
 # Requirements
@@ -65,6 +65,57 @@ yarn nx g @nrwl/angular:app mfe-poc-shell --mfe --mfeType=host --routing=true
 yarn nx g @nrwl/angular:app workspace --mfe --mfeType=remote --port=4201 --host=mfe-poc-shell --routing=false
 yarn nx g @nrwl/angular:app my-account --mfe --mfeType=remote --port=4202 --host=mfe-poc-shell --routing=false
 ```
+## Configuring Remote MFE
+Out of the box, Angular MFEs are set up with a single module and two components. One is your standard App.Component and the other is an Entry.Component.
+
+```
+apps/my-feature/src/
+  /app
+    /remote-entry
+        entry.component
+        entry.module
+    app.component
+    app.module
+  /assets
+  /environments
+```
+If you are to navigate to ```localhost:4201``` You will see the contents of app.component.
+Add the RouterModule to RemoteEntryMopdule
+```
+import { RemoteEntryComponent } from './entry.component';
+
+@NgModule({
+  declarations: [RemoteEntryComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: RemoteEntryComponent,
+
+      },
+    ]),
+  ],
+  providers: [],
+  exports: [RemoteEntryComponent],
+})
+export class RemoteEntryModule {}
+```
+
+Then add RemoteEntryComponent to AppComponent.html
+```
+<mfe-poc-my-account-entry></mfe-poc-my-account-entry>
+```
+And finally add ```RemoteEntryModule``` to AppModule imports
+```
+  imports: [
+    BrowserModule,
+    RemoteEntryModule
+  ],
+  ```
+
+Now if you visit ```localhost:4200/my-account``` you should see the shell app and My Account's **Entry** Component
+
 ## Adding Windowed Observable
 ```
 yarn add windowed-observable
@@ -78,7 +129,30 @@ Once installed, add the following to your package.json scripts or create .cmd fi
 ```
 cd static && http-server -a localhost -p 4299 -d
 ```
+## Inject static js into a component
+in your app component's constructor, inject Renderer2. Then create a script element, subscribe to it's onload event, and add it to the document.
+```
+import { Component,Renderer2 } from '@angular/core';
+declare let myService: any;
 
+@Component({
+  selector: 'mfe-poc-workspace-entry',
+  templateUrl: './entry.component.html'
+})
+export class RemoteEntryComponent {
+  constructor(private renderer: Renderer2) {
+    const script = this.renderer.createElement('script');
+    script.src = `http://localhost:4299/my.service.js`;
+    script.onload = () => {
+      console.log('Entry Component | my.service.js loaded');
+      console.log(myService.helloWorld())
+    }
+    this.renderer.appendChild(document.head, script);
+    console.log('Entry Component | CTOR DONE');
+  }
+}
+```
+>Note: If multiple MFEs rely on the same static JS, do the injection at the shell level and publish a message when it's ready. Check the example on github. It is injecting the service att the shell level and publishes a message. The MyAccount MFE subscribes to this message. Search "myService loaded successfully" to see the pub/sub setup.
 
 # Remote JS Services
 These are stateless JS services that are loaded at runtime. So when these js services change, previously compiled code doesn't have to be updated and recompiled.
@@ -98,6 +172,7 @@ ng g @angular-architects/ddd:init
 # Domain Driven Design
 ## Why DDD?
 Domain Driven Design is an approach to software development that helps teams accurately abstract business needs, write maintainable code, and ensure all stakeholders are on the same page.
+
 ## What is DDD?
 DDD is made up of many concepts. The 5 core concepts are as follows:
 1) The Domain
@@ -105,6 +180,7 @@ DDD is made up of many concepts. The 5 core concepts are as follows:
 3) The Ubiquitous Language
 4) The Context
 5) The Bounded Contexts and the "Big Ball of Mud"
+
 ## Recommended Reading:
 DDD Reference by Eric Evans (ISBN 978-1-4575-0119-7)
 Here are some samples from Vaughn Vernon's books on DDD  - these samples do a fine job of outlining some of the key concepts.
