@@ -22,22 +22,33 @@ And from [Setup MFE with Angular](https://nx.dev/guides/setup-mfe-with-angular):
 ## What if we need a service to sit between two Feature MFEs?
 ![https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/4.png](https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/4.png)
 
+## What does the workspace look like?
+```
++apps // MFE Shell applications. Each app is hosted individually. A shell app contains routing that points to these remote applications. At this level, the apps should contain very little logic. Just the things necessary for routing and very basic layouts.
++libs // The "guts" of the apps. Most of the logic and UI binding will live here.
++tools // These are build steps, generators  amd schematics. Things to help standardize the dev environment.
++static // Stateless Javascript files that are loaded at runtime. Not related to Angular.
+```
+
+# Requirements
+- VS Code
+- Node
+- Yarn
 
 # Get Started
-(use command)
-npm install -g nx
+Clone this repo and run the following commands:
 ```
-> yarn install
-> hostLibs.cmd
-> yarn start
+yarn global add nx
+yarn install
+yarn start
 ```
 
-# Commands
+# Creating this project from scratch using CLI commands
 ## Create NX Workspace
 ```
 yarn create nx-workspace mfe-poc --packageManager=yarn
 >apps
->cloud build is faster - not sure if it violates anything though. check with your client.
+>do not use cloud
 ```
 At this point, it will have created a folder called "mfe-poc". ```cd mfe-poc``` before continuing.
 ## Add Scaffolding for NX MFES
@@ -54,34 +65,48 @@ yarn nx g @nrwl/angular:app mfe-poc-shell --mfe --mfeType=host --routing=true
 yarn nx g @nrwl/angular:app workspace --mfe --mfeType=remote --port=4201 --host=mfe-poc-shell --routing=false
 yarn nx g @nrwl/angular:app my-account --mfe --mfeType=remote --port=4202 --host=mfe-poc-shell --routing=false
 ```
+## Adding Windowed Observable
+```
+yarn add windowed-observable
+```
+## Host static js
+
+```
+yarn add -global http-server
+```
+Once installed, add the following to your package.json scripts or create .cmd file
+```
+cd static && http-server -a localhost -p 4299 -d
+```
+
+
+# Remote JS Services
+These are stateless JS services that are loaded at runtime. So when these js services change, previously compiled code doesn't have to be updated and recompiled.
+
+Just use plain JS or Webpack. Do not use angular for stateless services!
+
+These files should extend the window object. Once loaded into an angular component, the component waits for the script to be fully loaded and processed. Once it is done, the angular script will react to this static file however it needs to. If certain components rely on a static JS lib, they should be disabled till the JS has loaded.
+
+This pattern is best for stateless JS services that need to be shared across MFEs. These services may change but the MFEs using them don't have to. This is good for 3rd party configurations that are used in multiple MFEs. Like an authentication system integration. Wrap the implementation into a static JS service and inject it anywhere you need this service. If its injected and added to the window already, you don't have to do it again. You could inject it at the app shell level and use Windowed Observables to let the other components know when it's ready.
+Or you could have multiple components try to load it and if it already exists, just exit. Lots of ways you can use this pattern to deliver stateless services remotely across MFEs.
 
 ## Add Scaffolding for Domain Libraries
 ```
 yarn add @angular-architects/ddd
 ng g @angular-architects/ddd:init
 ```
-## Adding Windowed Observable
-```
-yarn add windowed-observable
-```
-# Remote Runtime JS Libs
-Just use plain JS or Webpack. Do not use angular for stateless services!
-
-# MS Auth
-```
-htmfe-poc://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser
-
-htmfe-poc://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/samples/msal-browser-samples/VanillaJSTestApp2.0/app/default
-
-htmfe-poc://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/samples/msal-browser-samples/VanillaJSTestApp2.0
-```
-# ARCHIVE - OLD
-## Create Angular Component & Service Library project (Compile time only)
-```
-ng new mfe-poc-libs --directory=libs --skip-git  --new-project-root=libs --routing=false --create-application=false
-```
-> Black Magic Required - delete everything from libs except package.json angular.json and tsconfig.json. Copy dependencies from this package.json into the root's package.json and delete this package.json.
-> NOTE - angular.json and tsconfig.json MUST live in the LIBS folder. Not in the root.
-
-## Create mfe-poc Auth Service Lib
-```ng g library mfe-poc-auth```
+# Domain Driven Design
+## Why DDD?
+Domain Driven Design is an approach to software development that helps teams accurately abstract business needs, write maintainable code, and ensure all stakeholders are on the same page.
+## What is DDD?
+DDD is made up of many concepts. The 5 core concepts are as follows:
+1) The Domain
+2) The Model
+3) The Ubiquitous Language
+4) The Context
+5) The Bounded Contexts and the "Big Ball of Mud"
+## Recommended Reading:
+DDD Reference by Eric Evans (ISBN 978-1-4575-0119-7)
+Here are some samples from Vaughn Vernon's books on DDD  - these samples do a fine job of outlining some of the key concepts.
+https://ptgmedia.pearsoncmg.com/images/9780134434421/samplepages/9780134434421.pdf
+https://ptgmedia.pearsoncmg.com/images/9780321834577/samplepages/0321834577.pdf
