@@ -1,5 +1,28 @@
 # NXNGwSJSaWO
 NX - NG with Static JS and Windowed Observables
+## What is NX?
+
+From [NX Getting Started](https://nx.dev/getting-started/intro):
+>"Nx is a smart, fast and extensible build system with first class monorepo support and powerful integrations. It has a powerful core and a rich plugin ecosystem."
+
+And from [Setup MFE with Angular](https://nx.dev/guides/setup-mfe-with-angular):
+>"...We made some changes to our @nrwl/angular:app generator to aid in the scaffolding of Module Federation configuration required for setting up a Micro Frontend Architecture.
+>Therefore, using Nx it can be fairly straightforward to scaffold and build a Micro Frontend Architecture from a monorepo with all the additional benefits of Nx."
+
+## Basic flow with angular
+![https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/1.png](https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/1.png)
+
+## How NX is used for local development
+![https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/2.png](https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/2.png)
+
+## How can two MFEs communicate?
+![https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/3.png](https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/3.png)
+
+
+## What if we need a service to sit between two Feature MFEs?
+![https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/4.png](https://raw.githubusercontent.com/DevEarley/NXNGwSJSaWO/main/4.png)
+
+
 # Get Started
 (use command)
 npm install -g nx
@@ -52,7 +75,7 @@ htmfe-poc://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/
 
 htmfe-poc://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/samples/msal-browser-samples/VanillaJSTestApp2.0
 ```
-# NX README | mfe-pocAuthPoc
+# ARCHIVE - OLD
 ## Create Angular Component & Service Library project (Compile time only)
 ```
 ng new mfe-poc-libs --directory=libs --skip-git  --new-project-root=libs --routing=false --create-application=false
