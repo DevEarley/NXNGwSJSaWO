@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'windowed-observable';
+
 const myServiceLoadedSuccessfully$ = new Observable('myServiceLoadedSuccessfully');// move to service
+
 const message$ = new Observable('messageFromShell');// move to service
+
 declare let myService: any;
 
 @Component({

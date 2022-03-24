@@ -186,3 +186,54 @@ DDD Reference by Eric Evans (ISBN 978-1-4575-0119-7)
 Here are some samples from Vaughn Vernon's books on DDD  - these samples do a fine job of outlining some of the key concepts.
 https://ptgmedia.pearsoncmg.com/images/9780134434421/samplepages/9780134434421.pdf
 https://ptgmedia.pearsoncmg.com/images/9780321834577/samplepages/0321834577.pdf
+
+# Other Resources
+
+```
+nx generate @nrwl/angular:lib [name] [options,...]
+
+Options:
+  --name                  The name of the library.
+  --directory             A directory where the library is placed.
+  --publishable           Generate a publishable library.
+  --buildable             Generate a buildable library.
+  --prefix                The prefix to apply to generated selectors.
+  --skipFormat            Skip formatting files.
+  --simpleModuleName      Keep the module name simple (when using `--directory`).
+  --addModuleSpec         Add a module spec file.
+  --skipPackageJson       Do not add dependencies to `package.json`.
+  --skipTsConfig          Do not update `tsconfig.json` for development experience.
+  --routing               Add router configuration. See `lazy` for more information.
+  --lazy                  Add `RouterModule.forChild` when set to true, and a simple array of routes when set to false.
+  --parentModule          Update the router configuration of the parent module using `loadChildren` or `children`, depending on what `lazy` is set to.
+  --tags                  Add tags to the library (used for linting).
+  --unitTestRunner        Test runner to use for unit tests. (default: jest)
+  --importPath            The library name used to import it, like `@myorg/my-awesome-lib`. Must be a valid npm name.
+  --strict                Create a library with stricter type checking and build optimization options. (default: true)
+  --linter                The tool to use for running lint checks. (default: eslint)
+  --standaloneConfig      Split the project configuration into `<projectRoot>/project.json` rather than including it inside `workspace.json`.
+  --compilationMode       Specifies the compilation mode to use. If not specified, it will default to `partial` for publishable libraries and to `full` for buildable libraries. The `full` value can not be used for publishable libraries.
+  --setParserOptionsProjecWhether or not to configure the ESLint "parserOptions.project" option. We do not do this by default for lint performance reasons.
+  --addTailwind           Whether to configure Tailwind CSS for the application. It can only be used with buildable and publishable libraries. Non-buildable libraries will use the application's Tailwind configuration.
+  --skipModule            Whether to skip the creation of a default module when generating the library.
+  --dryRun                Runs through and reports activity without writing to disk.
+  --skip-nx-cache         Skip the use of Nx cache.
+  --help                  Show available options for project target.
+
+```
+
+# Generate a Service
+[Setup MFE with Angular](https://nx.dev/guides/setup-mfe-with-angular)
+
+If you have a monorepo, use ```--buildable```. Otherwise consider ```--publishable```.
+> --publishable requires --importPath.
+
+> Remember, only create and angular package if this logic needs to interface with your existing angular app! If you have standalone logic, create a stateless javascript service. If you have a "dumb" UI component, create a Web Component. Angular Services are stateful and require angular libraries. If your logic has nothing to do with angular or your app, then it doesn't need to be an Angular Library.
+```
+nx generate @nrwl/angular:lib mfe-poc-lib --buildable
+```
+
+```
+nx g @nrwl/angular:service service-wrapper --project=mfe-poc-lib-service-wrapper
+```
+

@@ -18,6 +18,7 @@ const workspaceRootPath = path.join(__dirname, '../../');
 const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(tsConfigPath, [
   /* mapped paths to share */
+  '@mfe-poc/mfe-poc-lib'
 ], workspaceRootPath);
 
 module.exports = {
@@ -41,7 +42,7 @@ module.exports = {
       remotes: {
     		"workspace": 'http://localhost:4201/remoteEntry.js',
     		"my-account": 'http://localhost:4202/remoteEntry.js',
-      
+
       },
       shared: share({
         "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: true },
@@ -51,8 +52,8 @@ module.exports = {
         "rxjs": { singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: true },
         ...sharedMappings.getDescriptors(),
       }),
-      library: { 
-        type: 'module' 
+      library: {
+        type: 'module'
       },
     }),
     sharedMappings.getPlugin(),

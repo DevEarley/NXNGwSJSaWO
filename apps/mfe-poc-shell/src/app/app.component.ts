@@ -1,8 +1,12 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Observable } from 'windowed-observable';
+import { ServiceWrapperService } from '@mfe-poc/mfe-poc-lib';
 const myServiceLoadedSuccessfully$ = new Observable('myServiceLoadedSuccessfully');
+
 const messageFromShell$ = new Observable('messageFromShell');
+
 declare let myService: any;
+
 @Component({
   selector: 'mfe-poc-root',
   templateUrl: './app.component.html',
@@ -10,24 +14,14 @@ declare let myService: any;
 })
 export class AppComponent {
   title = 'mfe-poc-shell';
-  constructor(private renderer: Renderer2) {
 
-    const script = this.renderer.createElement('script');
-    script.src = `http://localhost:4299/my.service.js`;
-    script.onload = () => {
-
-      console.log('APP Component |my.service.js loaded');
-      console.log(myService.helloWorld())
-      myServiceLoadedSuccessfully$.publish('Success');
-
-    }
-    this.renderer.appendChild(document.head, script);
-    console.log('APPCOMPONENT | CONSTRUCTOR INIT FINISHED');
+  constructor( private _serviceWrapperService:ServiceWrapperService,
+    private renderer:Renderer2) {
+    _serviceWrapperService.init(this.renderer);
   }
+
   sendMessage =():void=>{
     console.log('APPCOMPONENT | sendMessage');
-
-    messageFromShell$.publish('Hellllooooo');
-
+    console.log(myService.helloWorld());
   }
 }

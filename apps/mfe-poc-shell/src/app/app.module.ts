@@ -9,12 +9,13 @@ import { RouterModule } from '@angular/router';
     AppComponent
   ],
   imports: [
+
     BrowserModule,
     RouterModule.forRoot([{
-         path: 'workspace', 
+         path: 'workspace',
          loadChildren: () => import('workspace/Module').then(m => m.RemoteEntryModule)
      }, {
-         path: 'my-account', 
+         path: 'my-account',
          loadChildren: () => import('my-account/Module').then(m => m.RemoteEntryModule)
      }], {initialNavigation: 'enabledBlocking'})
   ],
