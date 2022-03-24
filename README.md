@@ -234,6 +234,37 @@ nx generate @nrwl/angular:lib mfe-poc-lib --buildable
 ```
 
 ```
-nx g @nrwl/angular:service service-wrapper --project=mfe-poc-lib-service-wrapper
+nx g @nrwl/angular:service service-wrapper --project=mfe-poc-lib
 ```
 
+Add this Lib to the Webpack config's sharedMappings...
+```
+const sharedMappings = new mf.SharedMappings();
+sharedMappings.register(tsConfigPath, [
+  /* mapped paths to share */
+  '@mfe-poc/mfe-poc-lib'
+], workspaceRootPath);
+
+```
+
+Import into your App.Component...
+```
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { ServiceWrapperService } from '@mfe-poc/mfe-poc-lib';
+...
+constructor(private serviceWrapperService:ServiceWrapperService)
+```
+
+Now build the lib
+```
+nx build mfe-poc-lib
+```
+>NOTE: the first time I did this, the compiler complained it couldn't find tsconfig.lib.json. I did a project wide search for that and made the path relative.
+>      "tsConfig": "/libs/mfe-poc-lib/tsconfig.lib.prod.json"
+>to
+>     "tsConfig": "./libs/mfe-poc-lib/tsconfig.lib.prod.json"
+And build the app
+```
+nx build
+```

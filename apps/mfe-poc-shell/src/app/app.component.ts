@@ -1,6 +1,10 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Observable } from 'windowed-observable';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { ServiceWrapperService } from '@mfe-poc/mfe-poc-lib';
+
 const myServiceLoadedSuccessfully$ = new Observable('myServiceLoadedSuccessfully');
 
 const messageFromShell$ = new Observable('messageFromShell');
