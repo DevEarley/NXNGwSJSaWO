@@ -65,7 +65,7 @@ yarn nx g @nrwl/angular:app mfe-poc-shell --mfe --mfeType=host --routing=true
 ## Add Remote MFEs
 ```
 yarn nx g @nrwl/angular:app workspace --mfe --mfeType=remote --port=4201 --host=mfe-poc-shell --routing=false
-yarn nx g @nrwl/angular:app my-account --mfe --mfeType=remote --port=4202 --host=mfe-poc-shell --routing=false
+yarn nx g @nrwl/angular:app my-account --mfe --mfeType=remote --port=4201 --host=mfe-poc-shell --routing=false
 ```
 ## Configuring Remote MFE
 Out of the box, Angular MFEs are set up with a single module and two components. One is your standard App.Component and the other is an Entry.Component.
@@ -284,8 +284,24 @@ Removing a "local MFE"
 
 > NOTE Any repos that contain code that is "compile time" than it should be resolved on "yarn install"
 > Any repos that contain complete MFEs should be optional. Not every developer needs to download each MFE.
-## Adding `git pull` to post install step
-## Using Remote MFEs vs Pulling and running MFEs locally
- Using Remote MFEs
 
- Pulling and running MFEs locally
+
+## Remote MFEs
+I created a git submodule for the "my-accounts" MFE. In the webpack.config.js for the shell app, you will see it's pointing to a remote version of this MFE.
+
+To point to the locally hosted version replace:
+```
+ plugins: [
+    new ModuleFederationPlugin({
+      remotes: {
+    		"my-account": 'https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static/my-account/remoteEntry.js',
+      },
+```
+with
+```
+ plugins: [
+    new ModuleFederationPlugin({
+      remotes: {
+        "my-account": 'https:localhost:4201/remoteEntry.js"
+      },
+```

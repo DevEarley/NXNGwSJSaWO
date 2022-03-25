@@ -40,7 +40,7 @@ module.exports = {
     new ModuleFederationPlugin({
       remotes: {
     		"my-account": 'https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static/my-account/remoteEntry.js',
-
+        //	"my-account": 'https:localhost:4201/remoteEntry.js"
       },
       shared: share({
         "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: true },
