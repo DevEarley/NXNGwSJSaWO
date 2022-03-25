@@ -40,7 +40,7 @@ module.exports = {
     new ModuleFederationPlugin({
       remotes: {
     		"workspace": 'http://localhost:4201/remoteEntry.js',
-    		"my-account": 'http://localhost:4202/remoteEntry.js',
+    		"my-account": 'https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/remoteEntry.js',
 
       },
       shared: share({

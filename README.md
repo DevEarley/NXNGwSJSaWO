@@ -1,5 +1,7 @@
 # NXNGwSJSaWO
 NX - NG with Static JS and Windowed Observables
+
+This repo is the result of the collaborative effort between Alex Earley, Doug Braxton and Mehmet "Mezo" Osmancik. Our goal was to design a FE solution that could be worked on by multiple teams using MFEs built with Angular and Git Submodules. "NXNGwSJSaWO" is a boilerplate NX project where each MFE is in it's own git submodule. Some submodules are required and are resolved on install. Others are optional and in their place the FE makes a request to some publicly hosted MFEs.
 ## What is NX?
 
 From [NX Getting Started](https://nx.dev/getting-started/intro):
@@ -255,3 +257,35 @@ And build the app
 ```
 nx build
 ```
+
+# The steps to adding a submodule
+
+Do it manually
+1. create new repo
+2. update the .gitmodules file
+3. add empty directory
+4. Commit and Push
+5. git submodules update --init --recursive
+
+Use the CLI
+1. create new repo
+2. cd into appropriate owning path (i.e. cd libs)
+3. add submodule using Git: git submodule add [repo URL]
+4. git commit -m "Add submodule X"; git push
+
+When pulling:
+1. git clone --recurse-submodules [url] -- or --
+2. git clone [url], then git submodule update --init --recursive -- or --
+3. Perform git submodule update for the singular repo you want to pull.
+
+Removing a "local MFE"
+1. update the .gitmodules file
+2. update the
+
+> NOTE Any repos that contain code that is "compile time" than it should be resolved on "yarn install"
+> Any repos that contain complete MFEs should be optional. Not every developer needs to download each MFE.
+## Adding `git pull` to post install step
+## Using Remote MFEs vs Pulling and running MFEs locally
+ Using Remote MFEs
+
+ Pulling and running MFEs locally
