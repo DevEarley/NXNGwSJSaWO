@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@mfe-poc/mfe-poc-services-lib": ["libs/mfe-poc-services-lib/src/index.ts"]
+      "@mfe-poc/mfe-poc-services-lib": [
+        "libs/mfe-poc-services-lib/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
