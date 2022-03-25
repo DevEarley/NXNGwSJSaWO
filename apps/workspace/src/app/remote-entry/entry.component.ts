@@ -1,7 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Observable } from 'windowed-observable';
 
-const myServiceLoadedSuccessfully$ = new Observable('myServiceLoadedSuccessfully');
+const WrapperService$ = new Observable('WrapperService');
 
 
 declare let myService: any;
@@ -19,7 +19,7 @@ export class RemoteEntryComponent {
       script.onload = () => {
         console.log('APP Component |my.service.js loaded');
         console.log(myService.helloWorld())
-        myServiceLoadedSuccessfully$.publish('Success');
+        WrapperService$.publish('Success');
       }
       this.renderer.appendChild(document.head, script);
     }

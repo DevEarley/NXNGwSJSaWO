@@ -225,45 +225,32 @@ Options:
 # Generate a Service
 [Setup MFE with Angular](https://nx.dev/guides/setup-mfe-with-angular)
 
-If you have a monorepo, use ```--buildable```. Otherwise consider ```--publishable```.
-> --publishable requires --importPath.
+
 
 > Remember, only create and angular package if this logic needs to interface with your existing angular app! If you have standalone logic, create a stateless javascript service. If you have a "dumb" UI component, create a Web Component. Angular Services are stateful and require angular libraries. If your logic has nothing to do with angular or your app, then it doesn't need to be an Angular Library.
 ```
-nx generate @nrwl/angular:lib mfe-poc-lib --buildable
+nx generate @nrwl/angular:lib mfe-poc-service-lib
 ```
 
 ```
-nx g @nrwl/angular:service service-wrapper --project=mfe-poc-lib
+nx g @nrwl/angular:service wrapper --project=mfe-poc-service-lib
 ```
 
-Add this Lib to the Webpack config's sharedMappings...
-```
-const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(tsConfigPath, [
-  /* mapped paths to share */
-  '@mfe-poc/mfe-poc-lib'
-], workspaceRootPath);
-
-```
 
 Import into your App.Component...
 ```
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { ServiceWrapperService } from '@mfe-poc/mfe-poc-lib';
+//import { <Name of Service> } from '@<app-prefix>/<lib-prefix>';
+
+import { WrapperService } from '@mfe-poc/mfe-poc-service-lib';
 ...
-constructor(private serviceWrapperService:ServiceWrapperService)
+constructor(private wrapperService:WrapperService)
 ```
 
 Now build the lib
 ```
-nx build mfe-poc-lib
+nx build mfe-poc-service-lib
 ```
->NOTE: the first time I did this, the compiler complained it couldn't find tsconfig.lib.json. I did a project wide search for that and made the path relative.
->      "tsConfig": "/libs/mfe-poc-lib/tsconfig.lib.prod.json"
->to
->     "tsConfig": "./libs/mfe-poc-lib/tsconfig.lib.prod.json"
+
 And build the app
 ```
 nx build

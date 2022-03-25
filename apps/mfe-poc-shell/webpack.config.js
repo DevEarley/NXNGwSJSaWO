@@ -18,7 +18,6 @@ const workspaceRootPath = path.join(__dirname, '../../');
 const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(tsConfigPath, [
   /* mapped paths to share */
-  '@mfe-poc/mfe-poc-lib'
 ], workspaceRootPath);
 
 module.exports = {

@@ -1,11 +1,9 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Observable } from 'windowed-observable';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { ServiceWrapperService } from '@mfe-poc/mfe-poc-lib';
+import { WrapperService } from '@mfe-poc/mfe-poc-service-lib';
 
-const myServiceLoadedSuccessfully$ = new Observable('myServiceLoadedSuccessfully');
+const WrapperService$ = new Observable('WrapperService');
 
 const messageFromShell$ = new Observable('messageFromShell');
 
@@ -19,7 +17,7 @@ declare let myService: any;
 export class AppComponent {
   title = 'mfe-poc-shell';
 
-  constructor( private _serviceWrapperService:ServiceWrapperService,
+  constructor( private _serviceWrapperService:WrapperService,
     private renderer:Renderer2) {
     _serviceWrapperService.init(this.renderer);
   }

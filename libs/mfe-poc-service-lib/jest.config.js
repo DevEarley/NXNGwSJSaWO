@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'mfe-poc-lib',
+  displayName: 'mfe-poc-service-lib',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/libs/mfe-poc-lib',
+  coverageDirectory: '../../coverage/libs/mfe-poc-service-lib',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
