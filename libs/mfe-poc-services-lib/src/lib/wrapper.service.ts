@@ -16,7 +16,7 @@ export class WrapperService {
   public init(renderer:any) {
     if (typeof myService === 'undefined') {
       const script = renderer.createElement('script');
-      script.src = `http://localhost:4299/my.service.js`;
+      script.src = `https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static/my.service.js`;
       script.onload = () => {
         console.log('APP Component |my.service.js loaded');
         console.log(myService.helloWorld());

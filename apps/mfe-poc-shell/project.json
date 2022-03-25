@@ -109,7 +109,6 @@
       "options": {
         "commands": [
           "nx serve my-account",
-          "nx serve workspace",
           "nx serve mfe-poc-shell"
         ]
       }

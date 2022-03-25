@@ -1,7 +1,7 @@
 # NXNGwSJSaWO
 NX - NG with Static JS and Windowed Observables
 
-This repo is the result of the collaborative effort between Alex Earley, Doug Braxton and Mehmet "Mezo" Osmancik. Our goal was to design a FE solution that could be worked on by multiple teams using MFEs built with Angular and Git Submodules. "NXNGwSJSaWO" is a boilerplate NX project where each MFE is in it's own git submodule. Some submodules are required and are resolved on install. Others are optional and in their place the FE makes a request to some publicly hosted MFEs.
+This repo is the result of the collaborative effort between [Alex Earley](https://github.com/DevEarley),  [Doug Braxton](https://github.com/doug8679)  and  [Mehmet "Mezo" Osmancik](https://github.com/mzekiosmancik). Our goal was to design a FE solution that could be worked on by multiple teams using MFEs built with Angular and Git Submodules. "NXNGwSJSaWO" is a boilerplate NX project where each MFE is in it's own git submodule. Some submodules are required and are resolved on install. Others are optional and in their place the FE makes a request to some publicly hosted MFEs.
 ## What is NX?
 
 From [NX Getting Started](https://nx.dev/getting-started/intro):
