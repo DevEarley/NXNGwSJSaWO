@@ -1,7 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Observable } from 'windowed-observable';
 
-import { WrapperService } from '@mfe-poc/mfe-poc-service-lib';
+import { WrapperService } from '@mfe-poc/mfe-poc-services-lib';
 
 const WrapperService$ = new Observable('WrapperService');
 

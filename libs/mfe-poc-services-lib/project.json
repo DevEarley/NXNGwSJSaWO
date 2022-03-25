@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/mfe-poc-services-lib",
+  "sourceRoot": "libs/mfe-poc-services-lib/src",
+  "prefix": "mfe-poc",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/mfe-poc-services-lib"],
+      "options": {
+        "jestConfig": "libs/mfe-poc-services-lib/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/mfe-poc-services-lib/src/**/*.ts",
+          "libs/mfe-poc-services-lib/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
