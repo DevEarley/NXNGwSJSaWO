@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "switch-to-local-mfe",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Existing MFE Remote Submodule name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "port": {
+      "type": "number",
+      "description": "Port",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    }
+  },
+  "required": ["name"]
+}

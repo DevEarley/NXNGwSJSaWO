@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "commands": "tools/commands",
     "mfe-poc-services-lib": "libs/mfe-poc-services-lib",
     "mfe-poc-shell": "apps/mfe-poc-shell",
     "my-account": "apps/my-account",

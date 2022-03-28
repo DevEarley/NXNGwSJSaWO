@@ -1,15 +1,23 @@
 {
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "$id": "get-mfe-rs",
+  "$id": "create-mfe-remote-submodule",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "Library name",
+      "description": "New MFE Remote Submodule name",
       "$default": {
         "$source": "argv",
         "index": 0
+      }
+    },
+    "port": {
+      "type": "number",
+      "description": "Port",
+      "$default": {
+        "$source": "argv",
+        "index": 1
       }
     }
   },

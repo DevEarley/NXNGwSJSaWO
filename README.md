@@ -2,6 +2,9 @@
 NX - NG with Static JS and Windowed Observables
 
 This repo is the result of the collaborative effort between [Alex Earley](https://github.com/DevEarley),  [Doug Braxton](https://github.com/doug8679)  and  [Mehmet "Mezo" Osmancik](https://github.com/mzekiosmancik). Our goal was to design a FE solution that could be worked on by multiple teams using MFEs built with Angular and Git Submodules. "NXNGwSJSaWO" is a boilerplate NX project where each MFE is in it's own git submodule. Some submodules are required and are resolved on install. Others are optional and in their place the FE makes a request to some publicly hosted MFEs.
+
+## What are MFEs?
+Micro Front End or MFEs are web apps that are hosted and compiled separately from each other. There are two types of MFE: Remote or Host. A Host app bootstraps Remote MFEs together into a cohesive experience for the user.
 ## What is NX?
 
 From [NX Getting Started](https://nx.dev/getting-started/intro):
@@ -122,6 +125,16 @@ Now if you visit ```localhost:4200/my-account``` you should see the shell app an
 ```
 yarn add windowed-observable
 ```
+
+# Remote JS Services
+These are stateless JS services that are loaded at runtime. So when these js services change, previously compiled code doesn't have to be updated and recompiled.
+
+Just use plain JS or Webpack. Do not use angular for stateless services!
+
+These files should extend the window object. Once loaded into an angular component, the component waits for the script to be fully loaded and processed. Once it is done, the angular script will react to this static file however it needs to. If certain components rely on a static JS lib, they should be disabled till the JS has loaded.
+
+This pattern is best for stateless JS services that need to be shared across MFEs. These services may change but the MFEs using them don't have to. This is good for 3rd party configurations that are used in multiple MFEs. Like an authentication system integration. Wrap the implementation into a static JS service and inject it anywhere you need this service. If its injected and added to the window already, you don't have to do it again. You could inject it at the app shell level and use Windowed Observables to let the other components know when it's ready.
+Or you could have multiple components try to load it and if it already exists, just exit. Lots of ways you can use this pattern to deliver stateless services remotely across MFEs.
 ## Host static js
 
 ```
@@ -156,21 +169,7 @@ export class RemoteEntryComponent {
 ```
 >Note: If multiple MFEs rely on the same static JS, do the injection at the shell level and publish a message when it's ready. Check the example on github. It is injecting the service att the shell level and publishes a message. The MyAccount MFE subscribes to this message. Search "myService loaded successfully" to see the pub/sub setup.
 
-# Remote JS Services
-These are stateless JS services that are loaded at runtime. So when these js services change, previously compiled code doesn't have to be updated and recompiled.
 
-Just use plain JS or Webpack. Do not use angular for stateless services!
-
-These files should extend the window object. Once loaded into an angular component, the component waits for the script to be fully loaded and processed. Once it is done, the angular script will react to this static file however it needs to. If certain components rely on a static JS lib, they should be disabled till the JS has loaded.
-
-This pattern is best for stateless JS services that need to be shared across MFEs. These services may change but the MFEs using them don't have to. This is good for 3rd party configurations that are used in multiple MFEs. Like an authentication system integration. Wrap the implementation into a static JS service and inject it anywhere you need this service. If its injected and added to the window already, you don't have to do it again. You could inject it at the app shell level and use Windowed Observables to let the other components know when it's ready.
-Or you could have multiple components try to load it and if it already exists, just exit. Lots of ways you can use this pattern to deliver stateless services remotely across MFEs.
-
-## Add Scaffolding for Domain Libraries
-```
-yarn add @angular-architects/ddd
-ng g @angular-architects/ddd:init
-```
 # Domain Driven Design
 ## Why DDD?
 Domain Driven Design is an approach to software development that helps teams accurately abstract business needs, write maintainable code, and ensure all stakeholders are on the same page.
@@ -188,47 +187,16 @@ DDD Reference by Eric Evans (ISBN 978-1-4575-0119-7)
 Here are some samples from Vaughn Vernon's books on DDD  - these samples do a fine job of outlining some of the key concepts.
 https://ptgmedia.pearsoncmg.com/images/9780134434421/samplepages/9780134434421.pdf
 https://ptgmedia.pearsoncmg.com/images/9780321834577/samplepages/0321834577.pdf
-
-# Other Resources
-
+## Add Scaffolding for Domain Libraries
 ```
-nx generate @nrwl/angular:lib [name] [options,...]
-
-Options:
-  --name                  The name of the library.
-  --directory             A directory where the library is placed.
-  --publishable           Generate a publishable library.
-  --buildable             Generate a buildable library.
-  --prefix                The prefix to apply to generated selectors.
-  --skipFormat            Skip formatting files.
-  --simpleModuleName      Keep the module name simple (when using `--directory`).
-  --addModuleSpec         Add a module spec file.
-  --skipPackageJson       Do not add dependencies to `package.json`.
-  --skipTsConfig          Do not update `tsconfig.json` for development experience.
-  --routing               Add router configuration. See `lazy` for more information.
-  --lazy                  Add `RouterModule.forChild` when set to true, and a simple array of routes when set to false.
-  --parentModule          Update the router configuration of the parent module using `loadChildren` or `children`, depending on what `lazy` is set to.
-  --tags                  Add tags to the library (used for linting).
-  --unitTestRunner        Test runner to use for unit tests. (default: jest)
-  --importPath            The library name used to import it, like `@myorg/my-awesome-lib`. Must be a valid npm name.
-  --strict                Create a library with stricter type checking and build optimization options. (default: true)
-  --linter                The tool to use for running lint checks. (default: eslint)
-  --standaloneConfig      Split the project configuration into `<projectRoot>/project.json` rather than including it inside `workspace.json`.
-  --compilationMode       Specifies the compilation mode to use. If not specified, it will default to `partial` for publishable libraries and to `full` for buildable libraries. The `full` value can not be used for publishable libraries.
-  --setParserOptionsProjecWhether or not to configure the ESLint "parserOptions.project" option. We do not do this by default for lint performance reasons.
-  --addTailwind           Whether to configure Tailwind CSS for the application. It can only be used with buildable and publishable libraries. Non-buildable libraries will use the application's Tailwind configuration.
-  --skipModule            Whether to skip the creation of a default module when generating the library.
-  --dryRun                Runs through and reports activity without writing to disk.
-  --skip-nx-cache         Skip the use of Nx cache.
-  --help                  Show available options for project target.
-
+yarn add @angular-architects/ddd
+ng g @angular-architects/ddd:init
 ```
 
-# Generate a Service
+# Set up MFE with Angular
 [Setup MFE with Angular](https://nx.dev/guides/setup-mfe-with-angular)
 
-
-
+# Generate a Service
 > Remember, only create and angular package if this logic needs to interface with your existing angular app! If you have standalone logic, create a stateless javascript service. If you have a "dumb" UI component, create a Web Component. Angular Services are stateful and require angular libraries. If your logic has nothing to do with angular or your app, then it doesn't need to be an Angular Library.
 ```
 nx generate @nrwl/angular:lib mfe-poc-services-lib
@@ -237,7 +205,6 @@ nx generate @nrwl/angular:lib mfe-poc-services-lib
 ```
 nx g @nrwl/angular:service wrapper --project=mfe-poc-services-lib
 ```
-
 
 Import into your App.Component...
 ```
@@ -258,7 +225,9 @@ And build the app
 nx build
 ```
 
-# The steps to adding a submodule
+# Git Submodules
+A Git Submodule is a repo that can be cloned by itself but it is apart of another repo.
+## Steps to adding a submodule
 
 Do it manually
 1. create new repo
@@ -285,7 +254,6 @@ Removing a "local MFE"
 > NOTE Any repos that contain code that is "compile time" than it should be resolved on "yarn install"
 > Any repos that contain complete MFEs should be optional. Not every developer needs to download each MFE.
 
-
 ## Remote MFEs
 I created a git submodule for the "my-accounts" MFE. In the webpack.config.js for the shell app, you will see it's pointing to a remote version of this MFE.
 
@@ -306,31 +274,26 @@ with
       },
 ```
 
-## MFE Remote Submodule (MFERS)
-Developers should easily get the MFE they want.
-Developers should be able to create an MFE and have it hooked up with git.
-The MFE should be accessible on it's own. They should be self contained, so any UI provided in a "Shell" app should be provided in the MFE's App Component.
-The source code MFE should be in a git submodule. This submodule should be apart of a "Shell" Repo.
+## MFE Remote Submodule
+A MFE Remote Submodule is an MFE that is the remote type and is checked into a git submodule.
+In this project, we are using a Host MFE (it's own sub module) and a bunch of Remotes. The project itself is checked into the Root repo. The Host and the Remotes are each in a submodule of that Root repo.
 
-NX has "Workspace Generators" that can be used to automate tasks. We can use these to build special MFEs that follow the guidelines above.
-The MFERS Generator should push this MFE to git as a git submodule. It will create the files needed and add the project to workspace.json and .gitmodules.
-The MFERS Generator does the following:
- Checks to see if you have anything pending or staged. FAIL - you must be checked out to a "clean" branch. no changes.
- Creates a new MFE
- Adds a reference to the "Remote Shell Wrapper" to App.Component
- Adds remote entry component to App.Component
- Adds MFE to .gitmodules
- Stages all changes to git
- automatically commits changes to git with automatic message.
- Dev has the choice to push.
+## Switch between local and public MFEs
+ `switch-to-local-mfe` is a NX Workspace Generator that configures the project to use the locally hosted mfe rather than what is out on dev.
+ Use `switch-to-public-mfe` to point back to dev.
 
 ```
-nx generate @nrwl/workspace:workspace-generator get-mfe-rs
+nx workspace-generator switch-to-local-mfe <name of the MFE>
+or
+nx workspace-generator switch-to-public-mfe <name of the MFE>
 ```
 
+## Create an MFE Remote Submodule
+
+ `create-mfe-remote-submodule` is a NX Workspace Generator that creates a remote MFE that is also configured as a git submodule. Once checked in, other developers can get this MFE by using the `switch-to-local-mfe` NX generator.
+
 ```
-nx workspace-generator get-mfe-rs some-mfe
+nx workspace-generator create-mfe-remote-submodule <name of the MFE>
 ```
 
-Using generator to create a file:
-https://nx.dev/generators/creating-files
+Or you can click the NX tab and choose Generate. At the end of the list, you can choose any of these generators.

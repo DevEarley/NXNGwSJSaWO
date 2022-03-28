@@ -17,7 +17,8 @@
     "paths": {
       "@mfe-poc/mfe-poc-services-lib": [
         "libs/mfe-poc-services-lib/src/index.ts"
-      ]
+      ],
+      "@mfe-poc/some-mfe": ["libs/some-mfe/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

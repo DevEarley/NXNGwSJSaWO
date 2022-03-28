@@ -1,3 +1,0 @@
-Hello World from <%= name %>!
-
-This is my <%= uppercase(name) %>
