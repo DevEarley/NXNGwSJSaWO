@@ -5,19 +5,26 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-
     BrowserModule,
-    RouterModule.forRoot([ {
-
-         path: 'my-account',
-         loadChildren: () => import('my-account/Module').then(m => m.RemoteEntryModule)
-     }], {initialNavigation: 'enabledBlocking', useHash:true})
+    RouterModule.forRoot(
+      [
+        {
+          path: 'my-account',
+          loadChildren: () =>
+            import('my-account/Module').then((m) => m.RemoteEntryModule),
+        },
+        {
+          path: 'my-profile',
+          loadChildren: () =>
+            import('my-profile/Module').then((m) => m.RemoteEntryModule),
+        },
+      ],
+      { initialNavigation: 'enabledBlocking', useHash: true }
+    ),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

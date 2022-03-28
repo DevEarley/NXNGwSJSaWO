@@ -1,27 +1,26 @@
 {
   "projectType": "application",
-  "root": "apps/mfe-poc-shell",
-  "sourceRoot": "apps/mfe-poc-shell/src",
+  "root": "apps/my-profile",
+  "sourceRoot": "apps/my-profile/src",
   "prefix": "mfe-poc",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/mfe-poc-shell",
-        "index": "apps/mfe-poc-shell/src/index.html",
-        "main": "apps/mfe-poc-shell/src/main.ts",
-        "polyfills": "apps/mfe-poc-shell/src/polyfills.ts",
-        "tsConfig": "apps/mfe-poc-shell/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
+        "outputPath": "dist/apps/my-profile",
+        "index": "apps/my-profile/src/index.html",
+        "main": "apps/my-profile/src/main.ts",
+        "polyfills": "apps/my-profile/src/polyfills.ts",
+        "tsConfig": "apps/my-profile/tsconfig.app.json",
         "assets": [
-          "apps/mfe-poc-shell/src/favicon.ico",
-          "apps/mfe-poc-shell/src/assets"
+          "apps/my-profile/src/favicon.ico",
+          "apps/my-profile/src/assets"
         ],
-        "styles": ["apps/mfe-poc-shell/src/styles.scss"],
+        "styles": ["apps/my-profile/src/styles.css"],
         "scripts": [],
         "customWebpackConfig": {
-          "path": "apps/mfe-poc-shell/webpack.config.js"
+          "path": "apps/my-profile/webpack.config.js"
         }
       },
       "configurations": {
@@ -40,13 +39,13 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/mfe-poc-shell/src/environments/environment.ts",
-              "with": "apps/mfe-poc-shell/src/environments/environment.prod.ts"
+              "replace": "apps/my-profile/src/environments/environment.ts",
+              "with": "apps/my-profile/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all",
           "customWebpackConfig": {
-            "path": "apps/mfe-poc-shell/webpack.prod.config.js"
+            "path": "apps/my-profile/webpack.prod.config.js"
           }
         },
         "development": {
@@ -64,48 +63,39 @@
       "executor": "@nrwl/angular:webpack-server",
       "configurations": {
         "production": {
-          "browserTarget": "mfe-poc-shell:build:production"
+          "browserTarget": "my-profile:build:production"
         },
         "development": {
-          "browserTarget": "mfe-poc-shell:build:development"
+          "browserTarget": "my-profile:build:development"
         }
       },
       "defaultConfiguration": "development",
       "options": {
-        "publicHost": "http://localhost:4200"
+        "port": 4205,
+        "publicHost": "http://localhost:4205"
       }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "mfe-poc-shell:build"
+        "browserTarget": "my-profile:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/mfe-poc-shell/src/**/*.ts",
-          "apps/mfe-poc-shell/src/**/*.html"
+          "apps/my-profile/src/**/*.ts",
+          "apps/my-profile/src/**/*.html"
         ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/mfe-poc-shell"],
+      "outputs": ["coverage/apps/my-profile"],
       "options": {
-        "jestConfig": "apps/mfe-poc-shell/jest.config.js",
+        "jestConfig": "apps/my-profile/jest.config.js",
         "passWithNoTests": true
-      }
-    },
-    "serve-mfe": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "nx serve my-profile",
-          "nx serve my-account",
-          "nx serve mfe-poc-shell"
-        ]
       }
     }
   },

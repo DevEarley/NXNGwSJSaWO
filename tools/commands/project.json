@@ -1,40 +1,38 @@
 {
-    "projectType": "library",
-    "root": "tools/commands",
-    "sourceRoot": "tools/commands",
-    "prefix": "tools-commands",
-    "targets": {
-        "switch-to-public-mfe": {
-            "executor": "@nrwl/workspace:run-commands",
-            "options": {
-              "commands": [
-                  "nx workspace-generator switch-to-public-mfe {args.name}"
-              ],
-              "parallel": false,
-              "cwd": "tools/commands"
-            }
-          },
-          "switch-to-local-mfe": {
-            "executor": "@nrwl/workspace:run-commands",
-            "options": {
-              "commands": [
-                  "nx workspace-generator switch-to-local-mfe {args.name} {args.port}"
-              ],
-              "parallel": false,
-              "cwd": "tools/commands"
-            }
-          },
-          "create-mfe-remote-submodule": {
-            "executor": "@nrwl/workspace:run-commands",
-            "options": {
-              "commands": [
-                  "nx workspace-generator create-mfe-remote-submodule {args.name}",
-                  "nx generate @nrwl/angular:mfe-remote --name={args.name} --port={args.port} --host=mfe-poc-shell --no-interactive"
-              ],
-              "parallel": false,
-              "cwd": "tools/commands"
-            }
-          }
+  "projectType": "library",
+  "root": "tools/commands",
+  "sourceRoot": "tools/commands",
+  "prefix": "tools-commands",
+  "targets": {
+    "switch-to-public-mfe": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["nx workspace-generator switch-to-public-mfe {args.name}"],
+        "parallel": false,
+        "cwd": "tools/commands"
+      }
     },
-    "tags": []
-  }
+    "switch-to-local-mfe": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx workspace-generator switch-to-local-mfe {args.name} {args.port}"
+        ],
+        "parallel": false,
+        "cwd": "tools/commands"
+      }
+    },
+    "create-mfe-remote-submodule": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx workspace-generator create-mfe-remote-submodule {args.name}",
+          "nx generate @nrwl/angular:mfe-remote --name={args.name} --port={args.port} --host=mfe-poc-shell --no-interactive"
+        ],
+        "parallel": false,
+        "cwd": "tools/commands"
+      }
+    }
+  },
+  "tags": []
+}

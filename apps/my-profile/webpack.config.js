@@ -28,7 +28,7 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: 'mfe-poc-shell',
+    uniqueName: 'my-profile',
     publicPath: 'auto',
   },
   optimization: {
@@ -44,11 +44,10 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      remotes: {
-        'my-account':
-          'https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static/my-account/remoteEntry.js',
-        'my-profile': 'http://localhost:4205/remoteEntry.js',
-        //	"my-account": 'https:localhost:4201/remoteEntry.js"
+      name: 'my-profile',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Module': 'apps/my-profile/src/app/remote-entry/entry.module.ts',
       },
       shared: share({
         '@angular/core': {
