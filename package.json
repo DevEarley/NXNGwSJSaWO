@@ -8,8 +8,8 @@
     "start": "start /B yarn start-nx & yarn host-static-js",
     "build": "nx build",
     "test": "nx test",
-    "add-remote":"",
-    "add-all-remotes":"git submodule update --init --recursive",
+    "add-remote": "",
+    "add-all-remotes": "git submodule update --init --recursive",
     "wp": "npx webpack ./static/tps-auth.service.js",
     "build:libs": "ng build",
     "postinstall": "ngcc --properties es2015 browser module main"
@@ -41,6 +41,7 @@
     "@nrwl/angular": "^13.9.4",
     "@nrwl/cli": "13.9.4",
     "@nrwl/cypress": "13.9.4",
+    "@nrwl/devkit": "13.9.4",
     "@nrwl/eslint-plugin-nx": "13.9.4",
     "@nrwl/jest": "13.9.4",
     "@nrwl/linter": "13.9.4",

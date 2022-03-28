@@ -305,3 +305,32 @@ with
         "my-account": 'https:localhost:4201/remoteEntry.js"
       },
 ```
+
+## MFE Remote Submodule (MFERS)
+Developers should easily get the MFE they want.
+Developers should be able to create an MFE and have it hooked up with git.
+The MFE should be accessible on it's own. They should be self contained, so any UI provided in a "Shell" app should be provided in the MFE's App Component.
+The source code MFE should be in a git submodule. This submodule should be apart of a "Shell" Repo.
+
+NX has "Workspace Generators" that can be used to automate tasks. We can use these to build special MFEs that follow the guidelines above.
+The MFERS Generator should push this MFE to git as a git submodule. It will create the files needed and add the project to workspace.json and .gitmodules.
+The MFERS Generator does the following:
+ Checks to see if you have anything pending or staged. FAIL - you must be checked out to a "clean" branch. no changes.
+ Creates a new MFE
+ Adds a reference to the "Remote Shell Wrapper" to App.Component
+ Adds remote entry component to App.Component
+ Adds MFE to .gitmodules
+ Stages all changes to git
+ automatically commits changes to git with automatic message.
+ Dev has the choice to push.
+
+```
+nx generate @nrwl/workspace:workspace-generator get-mfe-rs
+```
+
+```
+nx workspace-generator get-mfe-rs some-mfe
+```
+
+Using generator to create a file:
+https://nx.dev/generators/creating-files
