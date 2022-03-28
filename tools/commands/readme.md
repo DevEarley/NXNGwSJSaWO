@@ -8,18 +8,19 @@ In this project, we are using a Host MFE (it's own sub module) and a bunch of Re
 
 ## Usage
 ```
-nx workspace-generator switch-to-public-mfe <name of the MFE>
+
+nx run commands:switch-to-public-mfe --name=<name of the submodule>
 ```
-or
-Click the NX tab and choose Generate > switch-to-public-mfe
 
 # Switch to local Micro Front End Remote Submodule
  `switch-to-local-mfe` is a NX Workspace Generator that configures the project to use the locally hosted mfe rather than what is out on dev.
 
-
 ## Usage
 ```
-nx workspace-generator switch-to-local-mfe <name of the MFE>
+nx run commands:switch-to-local-mfe --name=<name of the submodule> --port=<some port>
 ```
-or
-Click the NX tab and choose Generate > switch-to-local-mfe
+
+# Create a new MFE Remote Submodule
+```
+nx run commands:create-mfe-remote-submodule --name=<name of the submodule> --port=<some port>
+```

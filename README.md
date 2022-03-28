@@ -283,9 +283,9 @@ In this project, we are using a Host MFE (it's own sub module) and a bunch of Re
  Use `switch-to-public-mfe` to point back to dev.
 
 ```
-nx workspace-generator switch-to-local-mfe <name of the MFE>
+nx run commands:switch-to-local-mfe --name=<name of the submodule> --port=<some port>
 or
-nx workspace-generator switch-to-public-mfe <name of the MFE>
+nx run commands:switch-to-public-mfe --name=<name of the submodule>
 ```
 
 ## Create an MFE Remote Submodule
@@ -293,7 +293,7 @@ nx workspace-generator switch-to-public-mfe <name of the MFE>
  `create-mfe-remote-submodule` is a NX Workspace Generator that creates a remote MFE that is also configured as a git submodule. Once checked in, other developers can get this MFE by using the `switch-to-local-mfe` NX generator.
 
 ```
-nx workspace-generator create-mfe-remote-submodule <name of the MFE>
+nx run commands:create-mfe-remote-submodule --name=<name of the submodule> --port=<some port>
 ```
 
 Or you can click the NX tab and choose Generate. At the end of the list, you can choose any of these generators.
