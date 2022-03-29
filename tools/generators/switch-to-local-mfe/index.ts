@@ -4,19 +4,23 @@ import {
 
 const filePath = `./apps/mfe-poc-shell/webpack.config.js`;
 
-const repoBase = "https://github.com/DevEarley"; //WITHOUT ENDING SLASH
+const repoBase = "https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static"; //WITHOUT ENDING SLASH
 
 export default async function (tree: Tree, schema: any) {
   const name = schema.name;
   const port = schema.port;
+  if(name == undefined || port == undefined)return;
+
   let submoduleFileContents =getSubmoduleFile(tree, name);
   updateWebpack(tree, name,port,submoduleFileContents);
 }
 //'my-profile': 'http://localhost:4205/remoteEntry.js',
 //TODO account for comma
 function updateWebpack(tree,name,port,submoduleFileContents){
-  console.log(`switch to local | updateWebpack | ,'${name}': '${repoBase}/remoteEntry.js'`, `,'${name}': 'http://localhost:${port}/remoteEntry.js'`)
-  submoduleFileContents.replace(`',${name}': '${repoBase}/remoteEntry.js'`, `,'${name}': 'http://localhost:${port}/remoteEntry.js'`);
+  console.log(`switch to local | updateWebpack`)
+  submoduleFileContents.replace(
+    `',${name}': '${repoBase}/remoteEntry.js'`,
+    `,'${name}': 'http://localhost:${port}/remoteEntry.js'`);
   tree.write(filePath, submoduleFileContents);
 }
 

@@ -11,14 +11,6 @@
         "$source": "argv",
         "index": 0
       }
-    },
-    "port": {
-      "type": "number",
-      "description": "Port",
-      "$default": {
-        "$source": "argv",
-        "index": 1
-      }
     }
   },
   "required": ["name"]

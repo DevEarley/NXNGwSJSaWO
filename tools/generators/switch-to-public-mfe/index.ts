@@ -4,7 +4,7 @@ import {
 
 const filePath = `./apps/mfe-poc-shell/webpack.config.js`;
 
-const repoBase = "https://github.com/DevEarley"; //WITHOUT ENDING SLASH
+const repoBase = "https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static"; //WITHOUT ENDING SLASH
 
 export default async function (tree: Tree, schema: any) {
   const name = schema.name;
@@ -13,6 +13,7 @@ export default async function (tree: Tree, schema: any) {
 }
 //'my-profile': 'http://localhost:4205/remoteEntry.js',
 function updateWebpack(tree,name,submoduleFileContents:string){
+  if(name == undefined)return;
   const regexString = `'${name}'\: 'http\:\/\/localhost\:.{4}\/remoteEntry\.js'`;
   const regexWithComma = new RegExp(`,${regexString}`,"gm");
   const regexWithoutComma = new RegExp(regexString,"gm");

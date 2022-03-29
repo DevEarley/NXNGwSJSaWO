@@ -12,6 +12,7 @@ const share = mf.share;
  * This NX_TSCONFIG_PATH environment variable is set by the @nrwl/angular:webpack-browser and it contains
  * the location of the generated temporary tsconfig file.
  */
+const host = "https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static"
 const tsConfigPath =
   process.env.NX_TSCONFIG_PATH ??
   path.join(__dirname, '../../tsconfig.base.json');
@@ -45,10 +46,8 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       remotes: {
-        'my-account':
-          'https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static/my-account/remoteEntry.js'
-          ,'my-profile': 'https://github.com/DevEarley/my-profile/remoteEntry.js'
-        //	"my-account": 'https:localhost:4201/remoteEntry.js"
+        'my-account': 'https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static/my-account/remoteEntry.js'
+        ,'my-profile': 'https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static/my-profile/remoteEntry.js'
       },
       shared: share({
         '@angular/core': {

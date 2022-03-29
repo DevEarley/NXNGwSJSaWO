@@ -4,24 +4,6 @@
   "sourceRoot": "tools/commands",
   "prefix": "tools-commands",
   "targets": {
-    "switch-to-public-mfe": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": ["nx workspace-generator switch-to-public-mfe {args.name}"],
-        "parallel": false,
-        "cwd": "tools/commands"
-      }
-    },
-    "switch-to-local-mfe": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "nx workspace-generator switch-to-local-mfe {args.name} {args.port}"
-        ],
-        "parallel": false,
-        "cwd": "tools/commands"
-      }
-    },
     "create-mfe-remote-submodule": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
