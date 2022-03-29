@@ -8,7 +8,8 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          "nx workspace-generator create-mfe-remote-submodule {args.name}",
+          {"command":"cd ../../","forwardAllArgs": false},
+          "git submodule add https://github.com/DevEarley/{args.name} apps/{args.name}",
           "nx generate @nrwl/angular:mfe-remote --name={args.name} --port={args.port} --host=mfe-poc-shell --no-interactive"
         ],
         "parallel": false,

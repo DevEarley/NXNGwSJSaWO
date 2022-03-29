@@ -5,8 +5,6 @@
     "mfe-poc-services-lib": "libs/mfe-poc-services-lib",
     "mfe-poc-shell": "apps/mfe-poc-shell",
     "my-account": "apps/my-account",
-    "my-account-e2e": "apps/my-account/my-account-e2e",
-    "my-profile": "apps/my-profile",
-    "my-profile-e2e": "apps/my-profile-e2e"
+    "my-account-e2e": "apps/my-account/my-account-e2e"
   }
 }
