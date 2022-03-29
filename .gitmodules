@@ -5,3 +5,6 @@
 [submodule "my-profile"]
   path = apps/my-profile
   url = https://github.com/DevEarley/my-profile.git
+[submodule "apps/my-profile/my-profile"]
+	path = apps/my-profile/my-profile
+	url = https://github.com/DevEarley/my-profile
