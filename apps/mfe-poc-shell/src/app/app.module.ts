@@ -14,8 +14,12 @@ import { RouterModule } from '@angular/router';
           path: 'my-account',
           loadChildren: () =>
             import('my-account/Module').then((m) => m.RemoteEntryModule),
-        }
-
+        },
+        {
+          path: 'my-profile',
+          loadChildren: () =>
+            import('my-profile/Module').then((m) => m.RemoteEntryModule),
+        },
       ],
       { initialNavigation: 'enabledBlocking', useHash: true }
     ),

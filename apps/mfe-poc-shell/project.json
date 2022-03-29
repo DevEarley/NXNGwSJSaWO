@@ -102,6 +102,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
+          "nx serve my-profile",
           "nx serve my-account",
           "nx serve mfe-poc-shell"
         ]

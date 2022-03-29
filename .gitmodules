@@ -1,3 +1,6 @@
 [submodule "NXNGwSJSaWO-Remote"]
 	path = apps/my-account
 	url = https://github.com/DevEarley/NXNGwSJSaWO-Remote.git
+[submodule "apps/my-profile"]
+	path = apps/my-profile
+	url = https://github.com/DevEarley/my-profile
