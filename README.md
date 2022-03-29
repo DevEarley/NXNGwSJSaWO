@@ -277,23 +277,28 @@ with
 ## MFE Remote Submodule
 A MFE Remote Submodule is an MFE that is the remote type and is checked into a git submodule.
 In this project, we are using a Host MFE (it's own sub module) and a bunch of Remotes. The project itself is checked into the Root repo. The Host and the Remotes are each in a submodule of that Root repo.
+# Micro Front End Remote Submodule NX Generators
+>NOTE Do not use the `create-mfe-remote-submodule` generator standalone. Instead, use the `Commands` under the NX Projects window.
 
-## Switch between local and public MFEs
+ `switch-to-public-mfe` is a NX Workspace Generator configures the project to use the publicly hosted mfe out on dev.
+ Use `switch-to-local-mfe` to point back to localhost.
+
+## Usage
+```
+ yarn nx workspace-generator switch-to-local-mfe --name=<name of app> <port>
+```
+
+# Switch to local Micro Front End Remote Submodule
  `switch-to-local-mfe` is a NX Workspace Generator that configures the project to use the locally hosted mfe rather than what is out on dev.
- Use `switch-to-public-mfe` to point back to dev.
 
+## Usage
 ```
-nx run commands:switch-to-local-mfe --name=<name of the submodule> --port=<some port>
-or
-nx run commands:switch-to-public-mfe --name=<name of the submodule>
+ yarn nx workspace-generator switch-to-public-mfe --name=<name of app>
 ```
 
-## Create an MFE Remote Submodule
-
- `create-mfe-remote-submodule` is a NX Workspace Generator that creates a remote MFE that is also configured as a git submodule. Once checked in, other developers can get this MFE by using the `switch-to-local-mfe` NX generator.
+# Create a new MFE Remote Submodule
 
 ```
 nx run commands:create-mfe-remote-submodule --name=<name of the submodule> --port=<some port>
 ```
-
-Or you can click the NX tab and choose Generate. At the end of the list, you can choose any of these generators.
+add `nx g @nrwl/workspace:move --project my-feature-lib shared/my-feature-lib` to move the e2e into the repo

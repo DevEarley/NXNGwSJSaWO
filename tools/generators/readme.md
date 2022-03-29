@@ -1,5 +1,5 @@
 # Micro Front End Remote Submodule NX Generators
->NOTE Do not use the `create-mfe-remote-submodule` standalone. Instead, use the `Commands` under the NX Projects window.
+>NOTE Do not use the `create-mfe-remote-submodule` generator standalone. Instead, use the `Commands` under the NX Projects window.
 
 # Switch to public Micro Front End Remote Submodule
 Micro Front End or MFEs are web apps that are hosted separately from each other. There are two types of MFE: Remote or Host. A Host app bootstraps Remote MFEs together into a cohesive experience for the user.
