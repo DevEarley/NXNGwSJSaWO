@@ -6,20 +6,14 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "Existing MFE Remote Submodule name",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      }
+      "description": "Existing MFE Remote Submodule name"
+
     },
     "port": {
       "type": "number",
-      "description": "Port",
-      "$default": {
-        "$source": "argv",
-        "index": 1
-      }
+      "description": "Port on localhost"
+
     }
   },
-  "required": ["name"]
+  "required": ["name","port"]
 }
