@@ -7,6 +7,6 @@
     "my-account": "apps/my-account",
     "my-account-e2e": "apps/my-account/my-account-e2e",
     "my-profile": "apps/my-profile",
-    "my-profile-e2e": "apps/my-profile-e2e"
+    "my-profile-e2e": "apps/my-profile/my-profile-e2e"
   }
 }
