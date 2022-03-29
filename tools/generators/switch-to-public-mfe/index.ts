@@ -26,12 +26,13 @@ function updateWebpack(tree,name,submoduleFileContents:string){
       return;
     }
     else{
-      console.log(matchesWithoutComma.index);
+      console.log("found match without comma");
         submoduleFileContents=  submoduleFileContents.replace(regexWithoutComma,`,'${name}': '${repoBase}/${name}/remoteEntry.js'`);
        tree.write(filePath, submoduleFileContents);
     }
   }
   else{
+    console.log("found match with comma");
     console.log(matchesWithComma.index);
       submoduleFileContents=  submoduleFileContents.replace(regexWithComma,`,'${name}': '${repoBase}/${name}/remoteEntry.js'`);
      tree.write(filePath, submoduleFileContents);
