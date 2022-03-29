@@ -8,11 +8,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          {
-            "command": "cd ../../",
-            "forwardAllArgs": false
-          },
-          "git submodule add https://github.com/DevEarley/{args.name} apps/{args.name}",
+          "git submodule add https://github.com/DevEarley/{args.name} ../../apps/{args.name}",
           {
             "command": "cd ../../",
             "forwardAllArgs": false
