@@ -302,3 +302,10 @@ In this project, we are using a Host MFE (it's own sub module) and a bunch of Re
 nx run commands:create-mfe-remote-submodule --name=<name of the submodule> --port=<some port>
 ```
 add `nx g @nrwl/workspace:move --project my-feature-lib shared/my-feature-lib` to move the e2e into the repo
+
+# What are the CNP and PSM commands?
+CNP stands for Commit n' Push. This script will add any changes you have, commit them to your current branch, and push them.
+## CNP usage
+```
+cnp this will be my commit message! Look ma, no quotes!
+```
