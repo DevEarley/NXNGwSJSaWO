@@ -47,7 +47,7 @@ module.exports = {
     new ModuleFederationPlugin({
       remotes: {
     		"my-profile": 'http://localhost:1234/remoteEntry.js',
-        'my-account': 'http://localhost:1122/remoteEntry.js'
+        'my-account': 'http://localhost:4201/remoteEntry.js'
       },
       shared: share({
         '@angular/core': {
