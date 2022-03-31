@@ -309,3 +309,13 @@ CNP stands for Commit n' Push. This script will add any changes you have, commit
 ```
 cnp this will be my commit message! Look ma, no quotes!
 ```
+
+PSM stands for Commit n' Push Submodules. The foreach iterates through each submodule and the "|| :" lets the foreach continue even if one of the submodules fails.
+```
+git submodule foreach "git add . || :"
+```
+
+## PSM usage
+```
+psm pushing any changes to each submodule as well as updating the main repo!
+```
