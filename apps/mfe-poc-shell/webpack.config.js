@@ -47,7 +47,7 @@ module.exports = {
     new ModuleFederationPlugin({
       remotes: {
     		'my-profile': 'https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static/my-profile/remoteEntry.js',
-        'my-account': 'http://localhost:4201/remoteEntry.js'
+        'my-account': 'https://nxn-gw-sj-sa-wo-static-eo2tt.ondigitalocean.app/static/my-account/remoteEntry.js'
       },
       shared: share({
         '@angular/core': {
