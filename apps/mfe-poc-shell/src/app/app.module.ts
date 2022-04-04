@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
+import { AuthGuard } from '@mfe-poc/mfe-poc-services-lib';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -19,12 +20,13 @@ import { RouterModule } from '@angular/router';
           path: 'my-profile',
           loadChildren: () =>
             import('my-profile/Module').then((m) => m.RemoteEntryModule),
+            canLoad: [AuthGuard]
         },
       ],
       { initialNavigation: 'enabledBlocking', useHash: true }
     ),
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
